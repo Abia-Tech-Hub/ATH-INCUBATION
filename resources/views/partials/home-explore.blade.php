@@ -11,9 +11,9 @@
         <div class="home-explore-head">
             <div>
                 <p class="section-label">START HERE</p>
-                <h2 class="h2" id="home-explore-title">A first step toward building something real</h2>
+                <h2 class="h2" id="home-explore-title">Turn a good question into a better opportunity.</h2>
             </div>
-            <p class="lead">Find out what the programme is, who it is for and how six weeks can help you move an idea forward.</p>
+            <p class="lead">Get to know the people, practical support and six-week journey designed to help student founders make progress with purpose.</p>
         </div>
         <div class="home-feature">
             <figure class="home-event-photo">
@@ -21,8 +21,8 @@
             </figure>
             <div class="home-feature-copy">
                 <p class="section-label">IDEAS GROW IN COMMUNITY</p>
-                <h3>Make room to explore, test and build.</h3>
-                <p>ATH brings students together with practical training and mentorship, helping turn early ideas into well-tested opportunities.</p>
+                <h3>Build with people who want to see you get further.</h3>
+                <p>Good ventures grow through useful questions, honest feedback and the discipline to test an idea before betting everything on it.</p>
             </div>
         </div>
         <nav class="home-route-list" aria-label="Explore Abia Tech Hub">

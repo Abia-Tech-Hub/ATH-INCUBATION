@@ -1,1 +1,168 @@
-## About Laravel Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as: - [Simple, fast routing engine](https://laravel.com/docs/routing). - [Powerful dependency injection container](https://laravel.com/docs/container). - Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage. - Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent). - Database agnostic [schema migrations](https://laravel.com/docs/migrations). - [Robust background job processing](https://laravel.com/docs/queues). - [Real-time event broadcasting](https://laravel.com/docs/broadcasting). Laravel is accessible, powerful, and provides tools required for large, robust applications. ## Learning Laravel Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library. You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals. ## Agentic Development Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow: `bash composer require laravel/boost --dev php artisan boost:install ` Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices. ## Contributing Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions). ## Code of Conduct In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct). ## Security Vulnerabilities If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed. ## License The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). #ATH-INCUATION
+# Abia Tech Hub Incubation
+
+Abia Tech Hub Incubation is a Laravel web application for the Hub's public programme information, startup applications, customer account access, and staff administration.
+
+## Features
+
+- Public pages for the programme, eligibility, partners, FAQs, and application information.
+- Validated startup applications with institution, team, sector, stage, and mentoring details.
+- Newsletter subscriptions.
+- Customer accounts created through single-use email sign-in links that expire after 15 minutes.
+- A staff dashboard for applications, bookings, and subscriber activity, with application status updates.
+- Role-based staff access, email invitations, two-factor authentication (TOTP), and audit logging.
+- Contact details are restricted to OWNER and ADMIN roles. OWNER accounts manage the team and audit log.
+
+## Technology
+
+- PHP 8.5 (Composer currently allows PHP `^8.3`).
+- Laravel 13.
+- SQLite by default in `.env.example`; MySQL and other Laravel-supported databases can be configured.
+- Blade views, Vite 8, and Tailwind CSS 4.
+- PHPUnit 12 for unit and feature tests.
+
+You will need PHP with the extensions required by Laravel and the selected database driver, Composer, Node.js, and npm.
+
+## Getting Started
+
+From the project root, install the application dependencies and build the frontend:
+
+```sh
+composer run setup
+```
+
+The setup script installs Composer and npm packages, creates `.env` from `.env.example` if needed, generates the application key, runs migrations, and builds the frontend assets. It does not overwrite an existing `.env` file.
+
+### Database and sessions
+
+The example environment uses SQLite. Configure `DB_CONNECTION` and the related `DB_*` values in `.env` if you use another database. Run `php artisan migrate` whenever the schema changes.
+
+The application uses database sessions by default. The repository does not currently include a migration for the `sessions` table, although staff invitation and security flows query that table to revoke sessions. For those flows, generate the migration once and run it:
+
+```sh
+php artisan make:session-table
+php artisan migrate
+```
+
+Keep the generated migration in version control so other environments receive the same schema. A file-based session driver can be used for basic local page development by setting `SESSION_DRIVER=file` in `.env`, but database-backed session revocation requires the sessions table and database session driver.
+
+### Create the initial owner
+
+Add an owner email and a password of at least 12 characters to `.env`:
+
+```dotenv
+OWNER_EMAIL=owner@example.com
+OWNER_PASSWORD=replace-with-a-strong-password
+```
+
+Then seed the database:
+
+```sh
+php artisan db:seed
+```
+
+The seeder creates or updates the OWNER account. Sign in at `/admin/login`; the owner must enroll in two-factor authentication before accessing the staff dashboard. Do not use a real password in documentation, source control, or shared terminal output.
+
+### Start development
+
+Run the configured Laravel development processes:
+
+```sh
+composer run dev
+```
+
+This starts the Laravel server, queue listener, and Vite. The default application URL is `http://localhost:8000`. Stop the processes with `Ctrl+C`.
+
+To run processes separately, use two terminals:
+
+```sh
+php artisan serve
+```
+
+```sh
+npm run dev
+```
+
+For a production frontend build, run `npm run build`.
+
+## Mail Configuration
+
+The example environment uses the `log` mail driver. In local development, sign-in links, team invitations, and application notification emails are written to `storage/logs/laravel.log` instead of being delivered. Configure a real mail transport in `.env` for delivery. Set `NOTIFY_EMAIL` to receive new application notifications; it is optional.
+
+## Routes
+
+| Path | Purpose |
+| --- | --- |
+| `/` | Home page |
+| `/about` | About the Hub |
+| `/who-can-apply` | Eligibility information |
+| `/program` | Programme information |
+| `/partners` | Partner information |
+| `/faqs` | Frequently asked questions |
+| `/apply` | Application form |
+| `/account` | Customer account page and magic-link request |
+| `/auth/verify` | Confirm a customer sign-in link |
+| `/admin/login` | Staff sign-in |
+| `/admin/setup` | Set a password from a staff invitation |
+| `/admin/security` | Configure staff two-factor authentication |
+| `/admin/mfa` | Verify a staff two-factor code |
+| `/admin` | Staff dashboard |
+| `/admin/team` | OWNER team management |
+| `/admin/audit` | OWNER audit log |
+
+Application submissions are sent with `POST /apply`; newsletter subscriptions use `POST /newsletter`. The web routes and authorization middleware are defined in [`routes/web.php`](routes/web.php).
+
+## Roles and Security
+
+- `CUSTOMER` accounts are created on successful email-link sign-in.
+- `STAFF` can access the staff dashboard.
+- `ADMIN` can manage application status and view applicant contact details. ADMIN accounts require MFA.
+- `OWNER` has ADMIN capabilities and can invite or remove staff and view the audit log. OWNER accounts require MFA.
+
+Staff invitations expire after 48 hours. Customer sign-in links are single-use and expire after 15 minutes. Staff authentication uses a password and, for OWNER and ADMIN accounts, a time-based one-time password. Authentication attempts are rate-limited, and sensitive account actions are recorded in the audit log.
+
+Keep `.env` and production credentials private. In production, set `APP_DEBUG=false`, use a unique `APP_KEY`, configure HTTPS and a real mail transport, and use managed database, session, cache, and queue services appropriate to the deployment.
+
+## Tests and Code Style
+
+Run the test suite with either command:
+
+```sh
+composer test
+```
+
+```sh
+vendor/bin/phpunit
+```
+
+Tests use in-memory SQLite, array sessions and cache, synchronous queues, and an array mailer as configured in `phpunit.xml`.
+
+Format changed PHP files with:
+
+```sh
+vendor/bin/pint --dirty --format agent
+```
+
+## Project Structure
+
+| Path | Contents |
+| --- | --- |
+| `app/Http/Controllers` | Public and admin request handlers |
+| `app/Http/Middleware` | Authentication, authorization, and request middleware |
+| `app/Models` | Eloquent models for users, applications, bookings, messages, subscribers, tokens, and audit logs |
+| `app/Support` | Shared security, audit, masking, and TOTP helpers |
+| `database/migrations` | Database schema migrations |
+| `database/seeders` | Database seeders, including the configurable owner account |
+| `resources/views` | Blade pages and shared view layouts |
+| `resources/css` and `resources/js` | Frontend entry points for Vite |
+| `routes/web.php` | Web routes |
+| `tests/Feature` and `tests/Unit` | Feature and unit tests |
+
+## Useful Commands
+
+```sh
+php artisan route:list
+php artisan migrate:status
+php artisan db:seed
+php artisan test
+npm run build
+```

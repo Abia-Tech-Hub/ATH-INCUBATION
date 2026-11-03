@@ -12,6 +12,16 @@ document.documentElement.classList.add('js');
   const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const DRAFT_KEY = 'ath-incubation-application-v1';
   const COLORS = { deep:'#0A0E27', forest:'#0A0E27', mid:'#111638', leaf:'#263152', lime:'#FFFFFF', mint:'#1D2648' };
+  const persistentEvents = new AbortController();
+  let pageEvents = new AbortController();
+  let activeNavigation = null;
+  const pageObservers = new Set();
+
+  function observePage(callback, options) {
+    const observer = new IntersectionObserver(callback, options);
+    pageObservers.add(observer);
+    return observer;
+  }
 
   const STEPS = [
     { id:1, name:'About you', title:'About you', desc:'Start with your details so the team knows who you are and how to reach you.' },
@@ -61,7 +71,7 @@ document.documentElement.classList.add('js');
     const mobileNav = $('#mobile-nav');
     if (!header || !menuBtn || !mobileNav) return;
     const onScroll = () => header.classList.toggle('is-solid', header.dataset.solid === 'true' || window.scrollY > 24 || mobileNav.classList.contains('is-open'));
-    window.addEventListener('scroll', onScroll, { passive:true });
+    window.addEventListener('scroll', onScroll, { passive:true, signal:persistentEvents.signal });
     onScroll();
 
     menuBtn.addEventListener('click', () => {
@@ -80,11 +90,9 @@ document.documentElement.classList.add('js');
     $$('a', mobileNav).forEach(a => a.addEventListener('click', closeMenu));
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && mobileNav.classList.contains('is-open')) { closeMenu(); menuBtn.focus(); }
-    });
+    }, { signal:persistentEvents.signal });
 
-    // Current-section highlight in nav
-    const routeLinks = $$('.nav a[href^="/"]');
-    routeLinks.forEach(link => link.classList.toggle('is-current', new URL(link.href).pathname === location.pathname));
+    updateCurrentRoute();
     const links = $$('.nav a[href^="#"]');
     const sections = links.map(a => $(a.getAttribute('href'))).filter(Boolean);
     const navObs = new IntersectionObserver(entries => {
@@ -97,6 +105,12 @@ document.documentElement.classList.add('js');
     sections.forEach(s => navObs.observe(s));
   }
 
+  function updateCurrentRoute() {
+    $$('.nav a[href^="/"]').forEach(link => {
+      link.classList.toggle('is-current', new URL(link.href).pathname === location.pathname);
+    });
+  }
+
   function initStickyApply() {
     const bar = $('#sticky-apply');
     const hero = $('#top');
@@ -105,15 +119,15 @@ document.documentElement.classList.add('js');
     if (!bar || !hero || !apply || !footer) return;
     let heroVisible = true, applyVisible = false, footerVisible = false;
     const update = () => bar.classList.toggle('is-visible', !heroVisible && !applyVisible && !footerVisible);
-    new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; update(); }, { threshold:0.15 }).observe(hero);
-    new IntersectionObserver(([e]) => { applyVisible = e.isIntersecting; update(); }, { threshold:0.05 }).observe(apply);
-    new IntersectionObserver(([e]) => { footerVisible = e.isIntersecting; update(); }, { threshold:0 }).observe(footer);
+    observePage(([e]) => { heroVisible = e.isIntersecting; update(); }, { threshold:0.15 }).observe(hero);
+    observePage(([e]) => { applyVisible = e.isIntersecting; update(); }, { threshold:0.05 }).observe(apply);
+    observePage(([e]) => { footerVisible = e.isIntersecting; update(); }, { threshold:0 }).observe(footer);
   }
 
   function initReveal() {
     const items = $$('.reveal, #chain');
     if (REDUCED || !('IntersectionObserver' in window)) { items.forEach(i => i.classList.add('in')); return; }
-    const obs = new IntersectionObserver(entries => {
+    const obs = observePage(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
     }, { threshold:0.18 });
     items.forEach(i => obs.observe(i));
@@ -130,8 +144,10 @@ document.documentElement.classList.add('js');
       this.ctx = canvas.getContext('2d');
       if (!this.ctx) return;
       this.resize();
-      let rt;
-      window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => this.resize(), 120); });
+      window.addEventListener('resize', () => {
+        clearTimeout(this.resizeTimer);
+        this.resizeTimer = setTimeout(() => this.resize(), 120);
+      }, { signal:pageEvents.signal });
       const hero = canvas.parentElement;
       hero.addEventListener('pointermove', e => {
         const r = canvas.getBoundingClientRect();
@@ -142,8 +158,8 @@ document.documentElement.classList.add('js');
       });
       hero.addEventListener('pointerleave', () => { this.pointer.target = 0; if (REDUCED) { this.pointer.strength = 0; this.draw(0); } });
       if (REDUCED) { this.draw(0); return; }
-      new IntersectionObserver(([e]) => e.isIntersecting ? this.start() : this.stop()).observe(canvas);
-      document.addEventListener('visibilitychange', () => document.hidden ? this.stop() : this.start());
+      observePage(([e]) => e.isIntersecting ? this.start() : this.stop()).observe(canvas);
+      document.addEventListener('visibilitychange', () => document.hidden ? this.stop() : this.start(), { signal:pageEvents.signal });
     },
 
     resize() {
@@ -226,6 +242,9 @@ document.documentElement.classList.add('js');
   const Journey = {
     tris:[], weeksEls:[],
     init() {
+      this.tris = [];
+      this.weeksEls = [];
+      this.ticking = false;
       const svg = $('#journey-svg');
       if (!svg) return;
       const ns = 'http://www.w3.org/2000/svg';
@@ -267,9 +286,15 @@ document.documentElement.classList.add('js');
       this.phases = $$('#phases .phase');
       this.mq = window.matchMedia('(min-width: 900px) and (min-height: 640px)');
       this.applyMode();
-      this.mq.addEventListener ? this.mq.addEventListener('change', () => this.applyMode()) : this.mq.addListener(() => this.applyMode());
-      window.addEventListener('scroll', () => this.onScroll(), { passive:true });
-      window.addEventListener('resize', () => this.onScroll());
+      if (this.mq.addEventListener) {
+        this.mq.addEventListener('change', () => this.applyMode(), { signal:pageEvents.signal });
+      } else {
+        const onChange = () => this.applyMode();
+        this.mq.addListener(onChange);
+        pageEvents.signal.addEventListener('abort', () => this.mq.removeListener(onChange), { once:true });
+      }
+      window.addEventListener('scroll', () => this.onScroll(), { passive:true, signal:pageEvents.signal });
+      window.addEventListener('resize', () => this.onScroll(), { signal:pageEvents.signal });
       this.onScroll();
     },
     applyMode() {
@@ -280,7 +305,7 @@ document.documentElement.classList.add('js');
     onScroll() {
       if (this.ticking) return;
       this.ticking = true;
-      requestAnimationFrame(() => {
+      this.raf = requestAnimationFrame(() => {
         this.ticking = false;
         let p;
         const vh = window.innerHeight;
@@ -355,10 +380,11 @@ document.documentElement.classList.add('js');
   }
 
   /* ---------- Application form ---------- */
-  const form = $('#apply-form');
+  let form = null;
   const els = {};
 
   function initForm() {
+    form = $('#apply-form');
     if (!form) return;
     els.stepper = $('#stepper');
     els.title = $('#step-title');
@@ -680,14 +706,116 @@ document.documentElement.classList.add('js');
     }
   }
 
+  function cleanupPage() {
+    pageEvents.abort();
+    pageObservers.forEach(observer => observer.disconnect());
+    pageObservers.clear();
+    Weave.stop();
+    clearTimeout(Weave.resizeTimer);
+    if (Journey.raf) cancelAnimationFrame(Journey.raf);
+    pageEvents = new AbortController();
+  }
+
+  function initPage() {
+    state.step = 1;
+    state.maxStep = 1;
+    state.sending = false;
+    state.sent = false;
+    state.elig = { student:null, abia:null };
+    state.journey = 0;
+    initStickyApply();
+    initReveal();
+    Weave.init($('#weave'));
+    Journey.init();
+    initEligibility();
+    initForm();
+  }
+
+  async function navigateTo(url, { addHistory = true } = {}) {
+    activeNavigation?.abort();
+    const navigation = new AbortController();
+    activeNavigation = navigation;
+    document.documentElement.setAttribute('aria-busy', 'true');
+
+    try {
+      const response = await fetch(url.href, {
+        credentials:'same-origin',
+        headers:{ 'Accept':'text/html', 'X-Requested-With':'XMLHttpRequest' },
+        signal:navigation.signal,
+      });
+      if (!response.ok) {
+        window.location.assign(url.href);
+        return;
+      }
+
+      const finalUrl = new URL(response.url || url.href, location.href);
+      const nextDocument = new DOMParser().parseFromString(await response.text(), 'text/html');
+      const currentMain = $('#main');
+      const nextMain = nextDocument.querySelector('#main');
+      if (finalUrl.origin !== location.origin || !currentMain || !nextMain) {
+        window.location.assign(url.href);
+        return;
+      }
+
+      cleanupPage();
+      currentMain.innerHTML = nextMain.innerHTML;
+      document.title = nextDocument.title;
+      const nextDescription = nextDocument.querySelector('meta[name="description"]');
+      const description = $('meta[name="description"]');
+      if (nextDescription && description) description.content = nextDescription.content;
+
+      const header = $('#site-header');
+      const nextHeader = nextDocument.querySelector('#site-header');
+      if (header && nextHeader) {
+        header.dataset.solid = nextHeader.dataset.solid;
+        header.classList.toggle('is-solid', nextHeader.dataset.solid === 'true');
+      }
+
+      if (addHistory) history.pushState({}, '', finalUrl.href);
+      updateCurrentRoute();
+      initPage();
+
+      if (finalUrl.hash) {
+        document.getElementById(decodeURIComponent(finalUrl.hash.slice(1)))?.scrollIntoView();
+      } else {
+        window.scrollTo(0, 0);
+      }
+      currentMain.setAttribute('tabindex', '-1');
+      currentMain.focus({ preventScroll:true });
+    } catch (error) {
+      if (error.name !== 'AbortError') window.location.assign(url.href);
+    } finally {
+      if (activeNavigation === navigation) {
+        activeNavigation = null;
+        document.documentElement.removeAttribute('aria-busy');
+      }
+    }
+  }
+
+  function initRouter() {
+    document.addEventListener('click', event => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = event.target.closest('a[href]');
+      if (!link || link.hasAttribute('download') || link.target || link.relList.contains('external')) return;
+
+      const url = new URL(link.href, location.href);
+      if (url.origin !== location.origin || url.href === location.href) return;
+      if (url.pathname === location.pathname && url.search === location.search && url.hash) return;
+      if (!$('#main')) return;
+
+      event.preventDefault();
+      navigateTo(url);
+    }, { signal:persistentEvents.signal });
+
+    window.addEventListener('popstate', () => {
+      navigateTo(new URL(location.href), { addHistory:false });
+    }, { signal:persistentEvents.signal });
+  }
+
   /* ---------- Boot ---------- */
   initHeader();
-  initStickyApply();
-  initReveal();
-  Weave.init($('#weave'));
-  Journey.init();
-  initEligibility();
-  initForm();
+  initPage();
+  initRouter();
 })();
 
 }

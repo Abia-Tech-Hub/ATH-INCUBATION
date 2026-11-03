@@ -9,7 +9,7 @@
     <meta name="description" content="@yield('description', 'The Abia Tech Hub Student Startup Incubation Programme: 6 weeks of mentorship and training for student founders at any Abia institution. Learn how it works and apply online.')">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Ubuntu:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="{{ asset('css/globals.css') }}">
     <link rel="stylesheet" href="{{ asset('css/template.css') }}">
 </head>

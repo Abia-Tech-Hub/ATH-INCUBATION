@@ -5,7 +5,7 @@
                 <a class="brand" href="/" aria-label="Abia Tech Hub, home">
                     @include('partials.logo')
                 </a>
-                <p>Empowering the next generation of tech leaders through innovation, education, and entrepreneurship.</p>
+                <p>Practical support for the next generation of founders building from Abia.</p>
                 <section class="footer-newsletter" aria-labelledby="footer-newsletter-title">
                     <h2 id="footer-newsletter-title">Subscribe to our newsletter</h2>
                     <form class="footer-newsletter-form" method="post" action="{{ route('newsletter.store') }}">
@@ -26,14 +26,15 @@
                 </section>
             </div>
 
-            <nav class="footer-column" aria-label="Company">
-                <h2 class="footer-heading">Company</h2>
+            <nav class="footer-column" aria-label="Programme">
+                <h2 class="footer-heading">Programme</h2>
                 <ul class="footer-links">
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="https://cretehost.com/">Web Hosting</a></li>
-                    <li><a href="https://abiatechhub.com/contact">Careers</a></li>
-                    <li><a href="https://abiatechhub.com/refund_policy">Refund Policy</a></li>
-                    <li><a href="https://blog.abiatechhub.com/">Blog</a></li>
+                    <li><a href="/about">About the programme</a></li>
+                    <li><a href="/who-can-apply">Eligibility</a></li>
+                    <li><a href="/program">Six-week programme</a></li>
+                    <li><a href="/faqs">FAQs</a></li>
+                    <li><a href="/partners">Partners</a></li>
+                    <li><a href="/apply">Apply</a></li>
                 </ul>
             </nav>
 
@@ -65,21 +66,8 @@
         </div>
 
         <nav class="footer-additional" aria-label="Additional links">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/program">The programme</a>
-            <a href="/who-can-apply">Who can apply</a>
-            <a href="/faqs">FAQs</a>
-            <a href="/partners">Partners</a>
-            <a href="/apply">Apply</a>
-            <a href="https://abiatechhub.com/services">Services</a>
-            <a href="https://abiatechhub.com/products">Products</a>
-            <a href="https://academy.abiatechhub.com/">Academy</a>
-            <a href="https://workspace.abiatechhub.com/">Workspace</a>
-            <a href="https://internet.abiatechhub.com/">Internet access</a>
-            <a href="https://techflock.ng/">Techflock</a>
+            <a href="https://abiatechhub.com/">Abia Tech Hub</a>
             <a href="https://blog.abiatechhub.com/">Blog</a>
-            <a href="https://abiatechhub.com/contact">Contact</a>
         </nav>
 
         <div class="footer-bottom">

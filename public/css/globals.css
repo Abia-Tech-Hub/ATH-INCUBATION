@@ -12,19 +12,19 @@
 
 :root {
   --forest-deep: #171a3f;
-  --forest: #22264F;
-  --forest-mid: #303765;
-  --leaf: #B7C7F5;
-  --lime: #FFD166;
-  --lime-strong: #F4B942;
-  --lime-soft: #FFF3D1;
+  --forest: #1f2447;
+  --forest-mid: #2a2f4e;
+  --leaf: #dfe6f2;
+  --lime: #e9edf4;
+  --lime-strong: #dde4ee;
+  --lime-soft: #f3f5f9;
   --white: #FFFFFF;
   --mist: #F4F5FA;
   --ink: #191B35;
   --muted: #62647B;
   --line: #E0E2EC;
   --error: #B42318;
-  --coral: #FF8A65;
+  --coral: #dfe6f2;
   --radius-s: 10px;
   --radius: 16px;
   --radius-l: 28px;
@@ -214,17 +214,19 @@ button, input, select, textarea {
 }
 
 .btn-lime {
-  background: var(--lime);
+  background: #E7EAEE;
   color: var(--forest-deep);
+  border-color: rgba(255,255,255,.2);
+  box-shadow: 0 12px 30px -20px rgba(5,8,18,.8);
 }
 
 .btn-lime:hover {
-  background: #FFFFFF;
-  box-shadow: 0 10px 30px -10px rgba(23,26,63,.2);
+  background: #F2F4F7;
+  box-shadow: 0 14px 32px -22px rgba(5,8,18,.9);
 }
 
 .btn-outline-light {
-  border-color: rgba(255,255,255,.35);
+  border-color: rgba(255,255,255,.5);
   color: var(--white);
   background: transparent;
 }

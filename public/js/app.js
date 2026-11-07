@@ -11,7 +11,7 @@ document.documentElement.classList.add('js');
   /* ---------- Constants ---------- */
   const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const DRAFT_KEY = 'ath-incubation-application-v1';
-  const COLORS = { deep:'#0A0E27', forest:'#0A0E27', mid:'#111638', leaf:'#263152', lime:'#FFFFFF', mint:'#1D2648' };
+  const COLORS = { deep:'#0B334D', forest:'#0B334D', mid:'#164967', leaf:'#64748B', lime:'#543C9E', mint:'#28556D' };
   const persistentEvents = new AbortController();
   let pageEvents = new AbortController();
   let activeNavigation = null;
@@ -106,8 +106,11 @@ document.documentElement.classList.add('js');
   }
 
   function updateCurrentRoute() {
-    $$('.nav a[href^="/"]').forEach(link => {
-      link.classList.toggle('is-current', new URL(link.href).pathname === location.pathname);
+    $$('.nav a[href^="/"], .mobile-nav a[href^="/"]').forEach(link => {
+      const isCurrent = new URL(link.href).pathname === location.pathname;
+      link.classList.toggle('is-current', isCurrent);
+      if (isCurrent) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
     });
   }
 
@@ -125,12 +128,108 @@ document.documentElement.classList.add('js');
   }
 
   function initReveal() {
-    const items = $$('.reveal, #chain');
+    const items = $$('.reveal, #chain, .impact-card');
     if (REDUCED || !('IntersectionObserver' in window)) { items.forEach(i => i.classList.add('in')); return; }
     const obs = observePage(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-    }, { threshold:0.18 });
+    }, { threshold:0.14 });
     items.forEach(i => obs.observe(i));
+  }
+
+  /* ---------- Number Reading / Animated Counters (inspired by youngafricainnovates.ng) ---------- */
+  function initCounters() {
+    const counterEls = $$('[data-counter]');
+    if (!counterEls.length) return;
+
+    if (REDUCED || !('IntersectionObserver' in window)) {
+      counterEls.forEach(el => {
+        const target = parseFloat(el.getAttribute('data-counter')) || 0;
+        const prefix = el.getAttribute('data-prefix') || '';
+        const suffix = el.getAttribute('data-suffix') || '';
+        const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+        el.textContent = `${prefix}${target.toLocaleString('en-US', {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        })}${suffix}`;
+      });
+      return;
+    }
+
+    const easeOutExpo = t => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+
+    const animateCounter = el => {
+      if (el.dataset.counted === 'true') return;
+      el.dataset.counted = 'true';
+
+      const target = parseFloat(el.getAttribute('data-counter')) || 0;
+      const prefix = el.getAttribute('data-prefix') || '';
+      const suffix = el.getAttribute('data-suffix') || '';
+      const duration = parseInt(el.getAttribute('data-duration') || '1600', 10);
+      const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      const startVal = 0;
+      const startTime = performance.now();
+
+      const frame = currentTime => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeOutExpo(progress);
+        const current = startVal + (target - startVal) * eased;
+
+        el.textContent = `${prefix}${current.toLocaleString('en-US', {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        })}${suffix}`;
+
+        if (progress < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          el.textContent = `${prefix}${target.toLocaleString('en-US', {
+            minimumFractionDigits: decimals,
+            maximumFractionDigits: decimals
+          })}${suffix}`;
+        }
+      };
+
+      requestAnimationFrame(frame);
+    };
+
+    const counterObs = observePage(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    counterEls.forEach(el => {
+      const prefix = el.getAttribute('data-prefix') || '';
+      const suffix = el.getAttribute('data-suffix') || '';
+      const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      if (el.dataset.counted !== 'true') {
+        el.textContent = `${prefix}${(0).toLocaleString('en-US', {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        })}${suffix}`;
+      }
+      counterObs.observe(el);
+    });
+  }
+
+  function initPageTransition() {
+    const main = $('#main');
+    if (!main || REDUCED) return;
+
+    main.classList.remove('page-enter');
+    void main.offsetWidth;
+    main.classList.add('page-enter');
+
+    const clearTransition = event => {
+      if (event.target !== main || event.animationName !== 'pageEnter') return;
+      main.classList.remove('page-enter');
+      main.removeEventListener('animationend', clearTransition);
+    };
+    main.addEventListener('animationend', clearTransition, { signal:pageEvents.signal });
   }
 
   /* ---------- Hero weave: a lattice of diamonds in chevron bands that ripples toward the pointer ---------- */
@@ -369,7 +468,7 @@ document.documentElement.classList.add('js');
     if (!student || !abia) return;
     if (student === 'yes' && abia === 'yes') {
       result.classList.add('is-yes');
-      result.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><p>You can apply.<small>Students at any Abia institution are welcome.</small></p><a class="btn btn-forest btn-sm" href="/apply">Start application</a>';
+      result.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><p>You can apply.<small>Students at any Abia institution are welcome.</small></p><a class="btn btn-lime btn-sm" href="/apply">Start application</a>';
     } else {
       result.classList.add('is-no');
       const msg = student === 'no'
@@ -723,8 +822,10 @@ document.documentElement.classList.add('js');
     state.sent = false;
     state.elig = { student:null, abia:null };
     state.journey = 0;
+    initPageTransition();
     initStickyApply();
     initReveal();
+    initCounters();
     Weave.init($('#weave'));
     Journey.init();
     initEligibility();

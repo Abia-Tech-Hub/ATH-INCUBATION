@@ -1,29 +1,225 @@
-/* Admin area: quiet and dense, using the site's own colour tokens from globals.css. */
-.adm { min-height: 100dvh; background: var(--color-background); color: var(--color-text); font: 400 15px/1.55 var(--font); }
-.adm a { color: inherit; }
-.adm-top { display: flex; align-items: center; gap: 20px; padding: 14px 24px; border-bottom: 1px solid var(--color-line); }
-.adm-top b { font-weight: 600; }
-.adm-top nav { display: flex; gap: 4px; flex-wrap: wrap; }
-.adm-top nav a { padding: 8px 12px; border-radius: 8px; text-decoration: none; color: var(--color-muted); min-height: 40px; display: inline-flex; align-items: center; }
-.adm-top nav a[aria-current="page"], .adm-top nav a:hover { color: var(--color-text); background: color-mix(in srgb, var(--color-text) 7%, transparent); }
-.adm-top form { margin-left: auto; }
-.adm-main { max-width: 1080px; margin: 0 auto; padding: 32px 24px 64px; display: grid; gap: 32px; }
-.adm h1 { font-size: 26px; margin: 0; }
-.adm h2 { font-size: 18px; margin: 0 0 12px; }
-.adm-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
-.adm-card { padding: 16px; border: 1px solid var(--color-line); border-radius: 12px; }
-.adm-card span { display: block; color: var(--color-muted); font-size: 13px; }
-.adm-card b { font-size: 24px; font-variant-numeric: tabular-nums; }
-.adm table { width: 100%; border-collapse: collapse; font-size: 14px; }
-.adm th, .adm td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--color-line); vertical-align: top; }
-.adm th { color: var(--color-muted); font-weight: 500; }
-.adm td form { display: inline-flex; gap: 6px; }
-.adm select, .adm input[type="email"], .adm input[type="password"], .adm input[type="text"] {
-  min-height: 40px; padding: 0 10px; border: 1px solid var(--color-line); border-radius: 8px; background: var(--color-surface); color: var(--color-text); font: inherit;
+/* Admin area: quiet, clean, and dense, using the official brand design tokens from globals.css. */
+.adm {
+  min-height: 100dvh;
+  background: var(--surface-tint);
+  color: var(--navy);
+  font: 400 15px/1.55 var(--font-body);
 }
-.adm .btn-quiet { min-height: 40px; padding: 0 14px; border: 1px solid var(--color-line); border-radius: 8px; background: none; color: var(--color-text); font: inherit; cursor: pointer; }
-.adm-note { color: var(--color-muted); font-size: 14px; }
-.adm-auth { max-width: 380px; margin: 12vh auto 0; padding: 0 20px; display: grid; gap: 16px; }
-.adm-auth form { display: grid; gap: 12px; }
-.adm-auth label { display: grid; gap: 6px; font-weight: 500; }
-.adm-code { font: 500 15px/1.4 ui-monospace, Menlo, Consolas, monospace; letter-spacing: .08em; padding: 12px; border: 1px dashed var(--color-line); border-radius: 8px; word-break: break-all; user-select: all; }
+
+.adm a {
+  color: inherit;
+}
+
+.adm-top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 28px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-xs);
+}
+
+.adm-top b {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 1.05rem;
+}
+
+.adm-top nav {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.adm-top nav a {
+  padding: 8px 14px;
+  border-radius: var(--radius-s);
+  text-decoration: none;
+  color: var(--secondary-text);
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.adm-top nav a:hover {
+  color: var(--navy);
+  background: var(--surface-tint);
+}
+
+.adm-top nav a[aria-current="page"] {
+  color: var(--white);
+  background: var(--brand-purple);
+  box-shadow: 0 2px 8px rgba(84, 60, 158, 0.35);
+}
+
+.adm-top form {
+  margin-left: auto;
+}
+
+.adm-main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 36px 28px 72px;
+  display: grid;
+  gap: 32px;
+}
+
+.adm h1 {
+  font-size: 26px;
+  margin: 0;
+  color: var(--navy);
+}
+
+.adm h2 {
+  font-size: 18px;
+  margin: 0 0 14px;
+  color: var(--navy);
+}
+
+.adm-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.adm-card {
+  padding: 20px 24px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-xs);
+}
+
+.adm-card span {
+  display: block;
+  color: var(--secondary-text);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.adm-card b {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+
+.adm table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}
+
+.adm th, .adm td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.adm th {
+  background: var(--surface-tint);
+  color: var(--secondary-text);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.adm td form {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.adm select, .adm input[type="email"], .adm input[type="password"], .adm input[type="text"] {
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  background: var(--white);
+  color: var(--navy);
+  font: inherit;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.adm select:focus, .adm input:focus {
+  border-color: var(--brand-purple);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--brand-purple-light);
+}
+
+.adm .btn-quiet {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  background: var(--white);
+  color: var(--navy);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.adm .btn-quiet:hover {
+  background: var(--surface-tint);
+  border-color: var(--border-strong);
+  color: var(--brand-purple);
+}
+
+.adm-note {
+  color: var(--secondary-text);
+  font-size: 14px;
+}
+
+.adm-auth {
+  max-width: 400px;
+  margin: 10vh auto 0;
+  padding: 36px 32px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-card);
+  display: grid;
+  gap: 20px;
+}
+
+.adm-auth form {
+  display: grid;
+  gap: 14px;
+}
+
+.adm-auth label {
+  display: grid;
+  gap: 6px;
+  font-weight: 500;
+  font-family: var(--font-heading);
+  color: var(--navy);
+  font-size: 0.92rem;
+}
+
+.adm-code {
+  font: 500 15px/1.4 ui-monospace, Menlo, Consolas, monospace;
+  letter-spacing: 0.08em;
+  padding: 14px;
+  background: var(--surface-tint);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-s);
+  word-break: break-all;
+  user-select: all;
+  color: var(--navy);
+}

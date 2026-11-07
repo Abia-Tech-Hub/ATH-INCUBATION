@@ -25,6 +25,8 @@
         <a href="/program">The programme</a>
         <a href="/faqs">FAQs</a>
         <a href="/partners">Partners</a>
-        <a href="/apply">Apply</a>
+        <div class="mobile-nav-cta">
+            <a class="btn btn-lime" href="/apply">Apply to the programme</a>
+        </div>
     </nav>
 </header>

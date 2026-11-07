@@ -4,4 +4,5 @@
 
 @section('content')
     @include('partials.why')
+    @include('partials.next-step')
 @endsection

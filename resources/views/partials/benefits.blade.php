@@ -2,10 +2,10 @@
     <div class="wrap">
         <div class="benefits-head">
             <div>
-                <p class="section-label">THE PROGRAMME</p>
-                <h2 class="h2 reveal" id="benefits-title">A stronger start for student founders</h2>
+                <p class="section-label">PROGRAMME PILLARS</p>
+                <h2 class="h2 reveal" id="benefits-title">A stronger, practical start for student founders</h2>
             </div>
-            <p class="lead reveal d1">Build with guidance, practical learning and a cohort of people taking their ideas seriously.</p>
+            <p class="lead reveal d1">Designed by startup operators to provide real-world velocity, practical frameworks, and a community of peers taking their ideas seriously.</p>
         </div>
         <div class="benefit-grid">
             <article class="benefit benefit-mentor reveal">
@@ -18,9 +18,15 @@
                         </svg>
                     </span>
                 </div>
-                <h3>Founder guidance</h3>
-                <p>Work with mentors who help you ask sharper questions, challenge assumptions and choose a useful next step.</p>
+                <h3>Dedicated Founder Guidance</h3>
+                <p>Work directly with mentors who help you ask sharper questions, challenge unproven assumptions, and choose high-impact next steps for your startup.</p>
+                <ul class="benefit-list">
+                    <li>1-on-1 weekly office hours</li>
+                    <li>Unbiased external critique</li>
+                    <li>Industry-specific technical advice</li>
+                </ul>
             </article>
+
             <article class="benefit benefit-training reveal d1">
                 <div class="benefit-top">
                     <span class="benefit-index">02</span>
@@ -31,9 +37,15 @@
                         </svg>
                     </span>
                 </div>
-                <h3>Learn by building</h3>
-                <p>Develop your idea through focused sessions on customers, validation, business models and the work of getting started.</p>
+                <h3>Learn by Practical Building</h3>
+                <p>Develop your venture through focused masterclasses on customer acquisition, rapid prototyping, business models, unit economics, and pitch decks.</p>
+                <ul class="benefit-list">
+                    <li>Action-oriented sprint tasks</li>
+                    <li>No academic busywork or fluff</li>
+                    <li>Real customer feedback metrics</li>
+                </ul>
             </article>
+
             <article class="benefit benefit-cohort reveal d2">
                 <div class="benefit-top">
                     <span class="benefit-index">03</span>
@@ -46,8 +58,13 @@
                         </svg>
                     </span>
                 </div>
-                <h3>Build alongside others</h3>
-                <p>Join a cohort of student founders, share progress and learn from the different ideas and experiences around you.</p>
+                <h3>Build Alongside Ambitious Peers</h3>
+                <p>Join a curated cohort of student founders from across Abia State. Share weekly wins, debug obstacles together, and forge long-term partnerships.</p>
+                <ul class="benefit-list">
+                    <li>Cross-campus founder community</li>
+                    <li>Accountability check-ins</li>
+                    <li>ATH Umuahia co-working access</li>
+                </ul>
             </article>
         </div>
     </div>

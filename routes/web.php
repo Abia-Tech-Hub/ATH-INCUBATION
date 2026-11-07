@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\AuditController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -9,9 +8,7 @@ use App\Http\Controllers\Admin\SetupController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\MagicLinkController;
 use App\Http\Controllers\NewsletterController;
-use App\Http\Controllers\VerifyController;
 use Illuminate\Support\Facades\Route;
 
 // Public pages
@@ -31,16 +28,6 @@ Route::post('/apply', [ApplyController::class, 'store'])
 Route::post('/newsletter', [NewsletterController::class, 'store'])
     ->middleware('throttle:5,15')
     ->name('newsletter.store');
-
-// Customer sign-in by emailed link
-Route::get('/account', [AccountController::class, 'index'])->name('account');
-Route::post('/account/link', [MagicLinkController::class, 'store'])
-    ->middleware('throttle:10,15')
-    ->name('account.link');
-Route::get('/auth/verify', [VerifyController::class, 'show'])->name('auth.verify');
-Route::post('/auth/verify', [VerifyController::class, 'store'])
-    ->middleware('throttle:20,15')
-    ->name('auth.verify.store');
 
 Route::post('/logout', LogoutController::class)->name('logout');
 

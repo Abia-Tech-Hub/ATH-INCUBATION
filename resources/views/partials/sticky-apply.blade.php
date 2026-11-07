@@ -1,1 +1,6 @@
-<div class="sticky-apply" id="sticky-apply"><p>6 weeks of mentorship and training<small>For students at any Abia institution</small></p><a class="btn btn-lime btn-sm" href="/apply">Apply</a></div>
+<div class="sticky-apply" id="sticky-apply">
+    <div class="sticky-apply-content">
+        <p><strong>Six-week startup sprint</strong><small>100% Free for students at any Abia institution</small></p>
+    </div>
+    <a class="btn btn-lime btn-sm" href="{{ route('apply') }}">Apply now</a>
+</div>

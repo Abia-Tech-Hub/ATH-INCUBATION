@@ -1,12 +1,72 @@
-/* Styles for the pages the template adds around your design (status messages, account, sign-in).
-   They use the colour tokens from globals.css, so they follow your design system. */
-.ac-flash { margin: 0 0 4px; padding: 12px 16px; border-radius: 10px; background: color-mix(in srgb, var(--color-accent) 14%, var(--color-background)); color: var(--color-text); font-size: .95em; }
-.ac-flash-err { background: color-mix(in srgb, #d92d20 14%, var(--color-background)); }
-.ac-narrow { max-width: 560px; margin: 0 auto; padding: clamp(48px, 10vw, 96px) 20px; display: grid; gap: 18px; }
-.ac-narrow h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.05; }
-.ac-narrow .btn { justify-self: start; }
-.ac-rows { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-line); }
-.ac-rows li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--color-line); }
-.ac-rows span { color: var(--color-muted); font-variant-numeric: tabular-nums; }
-.ac-rows em { font-style: normal; font-size: .85em; color: var(--color-muted); }
-form.f > .ac-flash { margin-bottom: 0; }
+/* Styles for the template pages (status messages, account, sign-in).
+   Follows the official brand design system tokens from globals.css. */
+
+.ac-flash {
+  margin: 0 0 16px;
+  padding: 14px 18px;
+  border-radius: var(--radius-s);
+  background: var(--brand-purple-light);
+  border: 1px solid var(--accent-on-dark);
+  color: var(--navy);
+  font-size: 0.94rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ac-flash-err {
+  background: var(--color-error-bg);
+  border-color: var(--color-error-border);
+  color: var(--color-error);
+}
+
+.ac-narrow {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: clamp(36px, 6vw, 60px) 24px;
+  display: grid;
+  gap: 18px;
+}
+
+.ac-narrow h1 {
+  font-size: clamp(28px, 5vw, 40px);
+  color: var(--navy);
+  line-height: 1.1;
+}
+
+.ac-narrow .btn {
+  justify-self: start;
+}
+
+.ac-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.ac-rows li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 16px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.ac-rows span {
+  color: var(--secondary-text);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9rem;
+}
+
+.ac-rows em {
+  font-style: normal;
+  font-size: 0.85em;
+  color: var(--secondary-text);
+}
+
+form.f > .ac-flash {
+  margin-bottom: 0;
+}

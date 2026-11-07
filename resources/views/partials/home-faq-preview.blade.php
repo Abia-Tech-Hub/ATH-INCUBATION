@@ -10,7 +10,7 @@
             <details class="faq-item" open>
                 <summary>Is the incubation programme completely free?</summary>
                 <div class="faq-answer">
-                    <p><strong>Yes, 100% free.</strong> There are no tuition fees, application costs, or hidden charges. Abia Tech Hub takes zero equity in your company. The programme is fully sponsored to support grassroots innovation and young entrepreneurs across Abia State.</p>
+                    <p><strong>Yes, 100% free.</strong> There are no tuition fees, application costs, or hidden charges. The programme is fully sponsored to support grassroots innovation and young entrepreneurs across Abia State.</p>
                 </div>
             </details>
 

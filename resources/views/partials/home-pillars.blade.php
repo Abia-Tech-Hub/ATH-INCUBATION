@@ -1,6 +1,6 @@
 <section class="section home-pillars on-light" id="pillars" aria-labelledby="pillars-title">
     <div class="wrap">
-        <div class="section-head text-center">
+        <div class="section-head text-center reveal">
             <p class="section-label">WHY INCUBATE WITH ATH</p>
             <h2 class="h2" id="pillars-title">Everything you need to go from concept to traction.</h2>
             <p class="lead">Most student projects stay in the classroom. We provide the practical structure, experienced mentorship, and community to turn yours into a real venture.</p>
@@ -66,7 +66,7 @@
         <div class="impact-section reveal">
             <div class="impact-header text-center">
                 <span class="badge-pill"><span class="badge-dot" aria-hidden="true"></span> PROGRAMME IN NUMBERS</span>
-                <h3 class="impact-title">Validated velocity, zero barrier, full founder ownership</h3>
+                <h3 class="impact-title">Validated progress, practical support, zero barriers</h3>
                 <p class="impact-desc">Inspired by leading youth innovation programmes, we combine structured execution with experienced mentorship to build real startups across Abia State.</p>
             </div>
 
@@ -87,15 +87,6 @@
                     </div>
                     <strong class="impact-label">Fully Sponsored</strong>
                     <p class="impact-text">Zero cost for all accepted students, including hub workspace & masterclasses.</p>
-                </div>
-
-                <div class="impact-card">
-                    <div class="impact-card-top">
-                        <span class="impact-number stat-num" data-counter="0" data-suffix="%">0%</span>
-                        <span class="impact-tag">Non-Dilutive</span>
-                    </div>
-                    <strong class="impact-label">Equity Taken</strong>
-                    <p class="impact-text">Founders retain 100% equity, intellectual property, and autonomy over their venture.</p>
                 </div>
 
                 <div class="impact-card">

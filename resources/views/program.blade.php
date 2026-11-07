@@ -6,7 +6,7 @@
 @section('content')
     <section class="section program-intro on-light" aria-labelledby="program-title">
         <div class="wrap">
-            <div class="section-head text-center max-w-750">
+            <div class="section-head text-center max-w-750 reveal">
                 <p class="section-label">SIX-WEEK SPRINT</p>
                 <h1 class="h2" id="program-title">A focused journey from raw idea to validated business.</h1>
                 <p class="lead">A practical sequence of founder training, weekly mentorship office hours, and milestones designed to help student founders make tangible, evidence-backed progress.</p>

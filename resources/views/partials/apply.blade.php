@@ -60,8 +60,8 @@
                     </svg>
                 </div>
                 <div>
-                    <strong>100% Free · 0% Equity</strong>
-                    <span>Your idea and intellectual property remain 100% yours.</span>
+                    <strong>100% Free</strong>
+                    <span>There are no application fees or tuition costs.</span>
                 </div>
             </div>
         </div>

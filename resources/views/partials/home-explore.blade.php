@@ -8,7 +8,7 @@
 @endphp
 <section class="section home-explore on-light" aria-labelledby="home-explore-title">
     <div class="wrap">
-        <div class="home-explore-head">
+        <div class="home-explore-head reveal">
             <div>
                 <p class="section-label">START HERE</p>
                 <h2 class="h2" id="home-explore-title">Turn a good question into a validated venture.</h2>

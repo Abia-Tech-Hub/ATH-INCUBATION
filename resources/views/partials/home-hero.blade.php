@@ -18,7 +18,7 @@
                 </div>
                 <div class="hero-subactions">
                     <a class="hero-eligibility-link" href="{{ route('who-can-apply') }}">Check whether you can apply (2 quick questions) <span aria-hidden="true">→</span></a>
-                    <p class="hero-note"><span class="hero-check-icon" aria-hidden="true">✓</span> 100% Tuition-Free & 0% Equity · Open to Students at All Abia Institutions</p>
+                    <p class="hero-note"><span class="hero-check-icon" aria-hidden="true">✓</span> 100% Tuition-Free · Open to Students at All Abia Institutions</p>
                 </div>
             </div>
             <figure class="hero-visual">

@@ -1,4 +1,4 @@
-<section class="section on-light eligibility-page" id="eligibility" aria-labelledby="elig-title">
+﻿<section class="section on-light eligibility-page" id="eligibility" aria-labelledby="elig-title">
     <div class="wrap">
         <div class="elig-grid">
             <div class="elig-copy-side">
@@ -80,41 +80,41 @@
         </div>
 
         <div class="institutions-showcase">
-            <div class="section-head text-center">
+            <div class="section-head text-center reveal">
                 <p class="section-label">SUPPORTED INSTITUTIONS</p>
                 <h2>Students from any tertiary institution in Abia are eligible.</h2>
                 <p class="lead">Undergraduates, postgraduates, diploma candidates, and recent graduates across all disciplines.</p>
             </div>
             <div class="institutions-grid">
-                <div class="institution-card">
+                <div class="institution-card reveal">
                     <strong>MOUAU</strong>
                     <span>Michael Okpara University of Agriculture, Umudike</span>
                 </div>
-                <div class="institution-card">
+                <div class="institution-card reveal d1">
                     <strong>ABSU</strong>
                     <span>Abia State University, Uturu</span>
                 </div>
-                <div class="institution-card">
+                <div class="institution-card reveal d2">
                     <strong>AbiaPoly</strong>
                     <span>Abia State Polytechnic, Aba</span>
                 </div>
-                <div class="institution-card">
+                <div class="institution-card reveal d1">
                     <strong>Rhema University</strong>
                     <span>Rhema University, Aba</span>
                 </div>
-                <div class="institution-card">
+                <div class="institution-card reveal d2">
                     <strong>Clifford University</strong>
                     <span>Clifford University, Owerrinta</span>
                 </div>
-                <div class="institution-card">
+                <div class="institution-card reveal">
                     <strong>Gregory University</strong>
                     <span>Gregory University, Uturu</span>
                 </div>
-                <div class="institution-card">
+                <div class="institution-card reveal d1">
                     <strong>Abia State COE</strong>
                     <span>Abia State College of Education, Arochukwu</span>
                 </div>
-                <div class="institution-card">
+                <div class="institution-card reveal d2">
                     <strong>Health Tech Aba</strong>
                     <span>Abia State College of Health Sciences & Tech, Aba</span>
                 </div>
@@ -123,23 +123,23 @@
         </div>
 
         <div class="stages-breakdown">
-            <div class="section-head text-center">
+            <div class="section-head text-center reveal">
                 <p class="section-label">STARTUP STAGES</p>
                 <h2>Where does your venture fit today?</h2>
                 <p class="lead">We tailor mentoring according to your current stage of progress.</p>
             </div>
             <div class="stages-grid">
-                <div class="stage-card">
+                <div class="stage-card reveal">
                     <span class="stage-tag">Stage 1</span>
                     <h3>Just an Idea</h3>
                     <p>You have observed a problem and have a hypothesis for how to solve it. We help you validate customer demand before building.</p>
                 </div>
-                <div class="stage-card">
+                <div class="stage-card reveal d1">
                     <span class="stage-tag">Stage 2</span>
                     <h3>Building Prototype</h3>
                     <p>You are crafting your minimum viable product (MVP), software demo, or physical sample. We help you focus on core functionality.</p>
                 </div>
-                <div class="stage-card">
+                <div class="stage-card reveal d2">
                     <span class="stage-tag">Stage 3</span>
                     <h3>Early Users</h3>
                     <p>A few real people or pilot customers are using your product or service. We help you measure feedback, refine unit economics, and prepare to scale.</p>

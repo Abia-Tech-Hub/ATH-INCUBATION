@@ -1,13 +1,13 @@
 <section class="section partners-page on-light" aria-labelledby="partners-title">
     <div class="wrap">
-        <div class="partners-intro">
+        <div class="partners-intro reveal">
             <p class="section-label">PARTNER WITH ABIA TECH HUB</p>
             <h1 id="partners-title">Help student innovation find its next breakthrough.</h1>
             <p class="lead">Abia’s next generation of founders accelerates when experienced business leaders, technologists, academic institutions, and organizations collaborate to share knowledge, access, and resources.</p>
         </div>
 
         <div class="partners-body">
-            <div class="partners-mission-card">
+            <div class="partners-mission-card reveal">
                 <h2>Building a sustainable grassroots founder community</h2>
                 <p>The Abia Tech Hub Student Startup Incubation Programme is purposefully designed to give students practical, hands-on support as they validate an idea and learn what it takes to build a durable business.</p>
                 <p>By partnering with us, you help bridge the gap between academic education and real-world market success right here in southeastern Nigeria.</p>
@@ -19,7 +19,7 @@
 
             <div class="partner-contributions">
                 <h2>Ways to collaborate & contribute</h2>
-                <article class="partner-contribution">
+                <article class="partner-contribution reveal">
                     <span class="partner-step-badge">01</span>
                     <div>
                         <h3>Mentor an Early-Stage Founder</h3>
@@ -27,7 +27,7 @@
                     </div>
                 </article>
 
-                <article class="partner-contribution">
+                <article class="partner-contribution reveal d1">
                     <span class="partner-step-badge">02</span>
                     <div>
                         <h3>Host a Focused Masterclass</h3>
@@ -35,7 +35,7 @@
                     </div>
                 </article>
 
-                <article class="partner-contribution">
+                <article class="partner-contribution reveal d2">
                     <span class="partner-step-badge">03</span>
                     <div>
                         <h3>Sponsor Tools, Credits or Grants</h3>
@@ -43,7 +43,7 @@
                     </div>
                 </article>
 
-                <article class="partner-contribution">
+                <article class="partner-contribution reveal d1">
                     <span class="partner-step-badge">04</span>
                     <div>
                         <h3>Academic & Campus Partnerships</h3>
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div class="partners-action-banner">
+        <div class="partners-action-banner reveal">
             <div class="partners-action-content">
                 <h3>Interested in contributing to the programme?</h3>
                 <p>Whether you want to mentor, sponsor, or connect your institution, the Abia Tech Hub team would love to speak with you.</p>

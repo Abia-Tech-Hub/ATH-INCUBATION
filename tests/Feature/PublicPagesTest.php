@@ -21,6 +21,11 @@ class PublicPagesTest extends TestCase
         foreach ($routes as $route) {
             $response = $this->get($route);
             $response->assertOk();
+            $pageContent = strtolower($response->getContent());
+
+            $this->assertStringNotContainsString('equity', $pageContent);
+            $this->assertStringNotContainsString('founder-owned', $pageContent);
+            $this->assertStringNotContainsString('founder ownership', $pageContent);
         }
 
         $home = $this->get(route('home'));

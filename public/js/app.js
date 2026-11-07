@@ -128,12 +128,13 @@ document.documentElement.classList.add('js');
   }
 
   function initReveal() {
-    const items = $$('.reveal, #chain, .impact-card');
+    const items = $$('.reveal, .chain-item, .impact-card');
     if (REDUCED || !('IntersectionObserver' in window)) { items.forEach(i => i.classList.add('in')); return; }
     const obs = observePage(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-    }, { threshold:0.14 });
-    items.forEach(i => obs.observe(i));
+    }, { threshold: 0.06, rootMargin: '0px 0px -32px 0px' });
+    // Double rAF ensures page-enter animation doesn't race with observer initialisation
+    requestAnimationFrame(() => requestAnimationFrame(() => items.forEach(i => obs.observe(i))));
   }
 
   /* ---------- Number Reading / Animated Counters (inspired by youngafricainnovates.ng) ---------- */
@@ -200,7 +201,7 @@ document.documentElement.classList.add('js');
           counterObs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
 
     counterEls.forEach(el => {
       const prefix = el.getAttribute('data-prefix') || '';
@@ -826,6 +827,7 @@ document.documentElement.classList.add('js');
     initStickyApply();
     initReveal();
     initCounters();
+    // Note: initReveal and initCounters use double-rAF internally
     Weave.init($('#weave'));
     Journey.init();
     initEligibility();

@@ -1,6 +1,6 @@
 <section class="section next-step on-light" aria-labelledby="next-step-title">
     <div class="wrap">
-        <div class="next-step-panel">
+        <div class="next-step-panel reveal">
             <div class="next-step-copy">
                 <p class="section-label">YOUR NEXT STEP</p>
                 <h2 class="h2" id="next-step-title">Ready to move your idea forward?</h2>

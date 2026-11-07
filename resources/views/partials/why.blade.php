@@ -37,14 +37,14 @@
         </div>
 
         <div class="methodology-section">
-            <div class="section-head text-center">
+            <div class="section-head text-center reveal">
                 <p class="section-label">THE INCUBATION METHODOLOGY</p>
                 <h2>A structured framework to build with conviction.</h2>
                 <p class="lead">We guide founders through three disciplined phases to ensure ideas are grounded in real user needs before scaling.</p>
             </div>
 
             <ol class="chain" id="chain" aria-label="What the programme helps founders do">
-                <li class="chain-item">
+                <li class="chain-item reveal">
                     <svg class="chain-shape" viewBox="0 0 100 100" aria-hidden="true">
                         <circle class="draw" cx="50" cy="50" r="34" fill="none" stroke="#0B334D" stroke-width="3" stroke-dasharray="6 7"></circle>
                         <circle class="fill" cx="50" cy="50" r="9" fill="#543C9E"></circle>
@@ -56,7 +56,7 @@
                     </div>
                 </li>
 
-                <li class="chain-item">
+                <li class="chain-item reveal d1">
                     <svg class="chain-shape" viewBox="0 0 100 100" aria-hidden="true">
                         <rect class="draw" x="22" y="22" width="56" height="56" rx="4" transform="rotate(45 50 50)" fill="none" stroke="#0B334D" stroke-width="3"></rect>
                         <path class="fill" d="M50 12 L88 50 L50 88 Z" fill="#543C9E"></path>
@@ -68,7 +68,7 @@
                     </div>
                 </li>
 
-                <li class="chain-item">
+                <li class="chain-item reveal d2">
                     <svg class="chain-shape" viewBox="0 0 100 100" aria-hidden="true">
                         <rect class="draw" x="16" y="16" width="68" height="68" rx="8" fill="none" stroke="#0B334D" stroke-width="3"></rect>
                         <rect class="fill" x="16" y="16" width="68" height="68" rx="8" fill="#0B334D"></rect>
@@ -84,21 +84,21 @@
         </div>
 
         <div class="about-values-grid">
-            <div class="value-card">
+            <div class="value-card reveal">
                 <div class="value-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
                 </div>
-                <h3>100% Free & Zero Equity</h3>
-                <p>We do not take a percentage of your business or charge fees. Your venture, intellectual property, and future gains remain entirely yours.</p>
+                <h3>100% Free</h3>
+                <p>There are no programme or participation fees, so students can focus on developing their ideas with practical support.</p>
             </div>
-            <div class="value-card">
+            <div class="value-card reveal d1">
                 <div class="value-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 </div>
                 <h3>Rooted in Abia State</h3>
                 <p>Designed specifically around the economic realities, supply chains, and opportunities of Abia State and the broader southeastern ecosystem.</p>
             </div>
-            <div class="value-card">
+            <div class="value-card reveal d2">
                 <div class="value-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 </div>

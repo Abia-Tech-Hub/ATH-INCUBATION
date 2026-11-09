@@ -107,14 +107,6 @@
                     <p class="impact-text">Direct 1-on-1 advisor sessions with real-world startup founders and product leads.</p>
                 </div>
 
-                <div class="impact-card">
-                    <div class="impact-card-top">
-                        <span class="impact-number stat-num" data-counter="2.5" data-prefix="₦" data-suffix="M+" data-decimals="1">₦2.5M+</span>
-                        <span class="impact-tag">Awards</span>
-                    </div>
-                    <strong class="impact-label">Demo Day & Hub Grants</strong>
-                    <p class="impact-text">Non-dilutive milestone prizes, co-working credits, and direct investor showcase access.</p>
-                </div>
             </div>
         </div>
     </div>

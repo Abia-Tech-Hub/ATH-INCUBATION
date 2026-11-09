@@ -18,10 +18,6 @@
                         <strong data-counter="100" data-suffix="% Free">100% Free</strong>
                         <span>Zero Tuition</span>
                     </div>
-                    <div class="stat-pill">
-                        <strong data-counter="0" data-suffix="% Equity">0% Equity</strong>
-                        <span>Founder-Owned</span>
-                    </div>
                 </div>
             </div>
 

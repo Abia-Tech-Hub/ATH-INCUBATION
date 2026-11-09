@@ -266,8 +266,8 @@
                                 <select class="input" id="f-heard" name="heard">
                                     <option value="">Choose one</option>
                                     <option>A friend or classmate</option>
-                                    <option>My university / faculty notice</option>
-                                    <option>Social media (X, Instagram, LinkedIn)</option>
+                                    <option value="My institution">My university / faculty notice</option>
+                                    <option value="Social media">Social media (X, Instagram, LinkedIn)</option>
                                     <option>An Abia Tech Hub event</option>
                                     <option>Other</option>
                                 </select>
